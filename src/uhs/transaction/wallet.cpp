@@ -25,11 +25,16 @@ namespace cbdc {
         m_shuffle.seed(static_cast<uint32_t>(seed));
         if(OracleDB_init(&db) == 0) {
             if(OracleDB_connect(&db) == 0) {
-                std::cout << "Connected to Oracle Autonomous Database" << std::endl;
-            }else{
-                std::cout << "Failed to connect to Oracle Autonomous Database" << std::endl;
+            //     std::cout << "Connected to Oracle Autonomous Database" << std::endl;
+            // } else {
+            //     std::cout << "Failed to connect to Oracle Autonomous Database" << std::endl;
             }
         }
+    }
+
+    transaction::wallet::~wallet() {
+        // Clean up and close the database connection when the wallet is destroyed
+        OracleDB_disconnect(&db);
     }
 
     auto transaction::wallet::mint_new_coins(const size_t n_outputs,
