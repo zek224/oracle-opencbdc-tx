@@ -212,9 +212,9 @@ namespace cbdc::locking_shard {
 
         std::string dtx_hex_insert = "UPDATE admin.transaction SET confirmed = 1 WHERE hash = '" + dtx_hex + "'"; 
         if(OracleDB_execute(&db, dtx_hex_insert.c_str()) == 0) {
-            m_logger->info("Inserted DTX Hex into shard_data");
+            m_logger->info("Inserted DTX Hex into admin.transaction from locking_shard.cpp");
         } else {
-            m_logger->error("Failed to insert DTX Hex into shard_data");
+            m_logger->error("Failed to insert DTX Hex into admin.transaction from locking_shard.cpp");
         }
 
         //For loop through ctx's inputs and outputs and insert into DB

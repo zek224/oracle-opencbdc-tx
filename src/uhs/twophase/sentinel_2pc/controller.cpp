@@ -267,9 +267,9 @@ namespace cbdc::sentinel_2pc {
 
             std::string dtx_inputs_insert = "INSERT INTO admin.input (transhash, inputhash) VALUES ('" + dtx_hex + "', '" + in_hex + "')";
             if(OracleDB_execute(&db, dtx_inputs_insert.c_str()) == 0) {
-                m_logger->info("Inserted DTX Inputs into shard_data");
+                m_logger->info("Inserted DTX Inputs into admin.input from controller.cpp");
             } else {
-                m_logger->error("Failed to insert DTX Inputs into shard_data");
+                m_logger->error("Failed to insert DTX Inputs into admin.input from controller.cpp");
             }
         }
 
@@ -286,9 +286,9 @@ namespace cbdc::sentinel_2pc {
 
             std::string dtx_outputs_insert = "INSERT INTO admin.output (transhash, outputhash) VALUES ('" + dtx_hex + "', '" + out_hex + "')";
             if(OracleDB_execute(&db, dtx_outputs_insert.c_str()) == 0) {
-                m_logger->info("Inserted DTX Outputs into shard_data");
+                m_logger->info("Inserted DTX Outputs into admin.output from controller.cpp");
             } else {
-                m_logger->error("Failed to insert DTX Outputs into shard_data");
+                m_logger->error("Failed to insert DTX Outputs into admin.output from controller.cpp");
             }
 
         }
@@ -296,9 +296,9 @@ namespace cbdc::sentinel_2pc {
 
         std::string dtx_hex_insert = "UPDATE admin.transaction SET confirmed = 1 WHERE hash = '" + dtx_hex + "'";   // Confirms transaction when through
         if(OracleDB_execute(&db, dtx_hex_insert.c_str()) == 0) {
-            m_logger->info("Inserted DTX Hex into shard_data");
+            m_logger->info("Inserted DTX Hex into admin.transaction from controller.cpp");
         } else {
-            m_logger->error("Failed to insert DTX Hex into shard_data");
+            m_logger->error("Failed to insert DTX Hex into admin.transaction from controller.cpp");
         }
     }
 }
