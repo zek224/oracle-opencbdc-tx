@@ -43,9 +43,10 @@ int OracleDB_connect(OracleDB *db) {
     OCIHandleAlloc(db->envhp, (void **)&db->usrhp, OCI_HTYPE_SESSION, 0, NULL);
 
     // Attach to server
-    db->status = OCIServerAttach(db->srvhp, db->errhp, (text *)"cbdcauto_low", strlen("cbdcauto_low"), OCI_DEFAULT);
+    db->status = OCIServerAttach(db->srvhp, db->errhp, (text *)"lw41k4xzf2od0kvy_low", strlen("lw41k4xzf2od0kvy_low"), OCI_DEFAULT);
     if(db->status != OCI_SUCCESS) {
         printf("[Oracle DB] Error attaching to server.\n");
+        printf("[Oracle DB] Currently set to connect to lw41k4xzf2od0kvy_low.\n");
         print_oci_error(db->errhp);
         return 1;
     }
