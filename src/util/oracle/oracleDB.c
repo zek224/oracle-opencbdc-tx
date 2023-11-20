@@ -117,7 +117,8 @@ int OracleDB_execute(OracleDB *db, const char *sql_query) {
     // execute
     db->status = OCIStmtExecute(db->svchp, stmthp, db->errhp, 1, 0, NULL, NULL, OCI_DEFAULT);
     if (db->status != OCI_SUCCESS) {
-        printf("[Oracle DB] Error executing SQL statement\n");
+        // print sql statement trying to be executed
+        printf("[Oracle DB] Error executing SQL statement: %s\n", sql_query);
         print_oci_error(db->errhp);
         return 1;
     }
