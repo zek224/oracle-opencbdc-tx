@@ -22,8 +22,8 @@ int OracleDB_init(OracleDB *db) {
 
     // Read keys from key file
     if (read_key_file(db->username, db->password, db->wallet_pw) == 0) {
-        printf("[Oracle DB] Read key file successfully.\n");
-        printf("[Oracle DB] Username: %s\n", db->username);
+        // printf("[Oracle DB] Read key file successfully.\n");
+        // printf("[Oracle DB] Username: %s\n", db->username);
     } else {
         printf("[Oracle DB] Error reading key file.\n");
         return 1;
@@ -86,7 +86,7 @@ int OracleDB_connect(OracleDB *db) {
         return 1;
     }
 
-    printf("[Oracle DB] Connected to Oracle Database.\n");
+    // printf("[Oracle DB] Connected to Oracle Database.\n");
     return 0;
 }
 
@@ -120,7 +120,7 @@ int OracleDB_execute(OracleDB *db, const char *sql_query) {
         print_oci_error(db->errhp);
         return 1;
     }
-    printf("[Oracle DB] SQL statement executed successfully.\n");
+    // printf("[Oracle DB] SQL statement executed successfully.\n");
 
     // Commit the transaction
     db->status = OCITransCommit(db->svchp, db->errhp, OCI_DEFAULT);
@@ -129,7 +129,7 @@ int OracleDB_execute(OracleDB *db, const char *sql_query) {
         print_oci_error(db->errhp);
         return 1;
     }
-    printf("[Oracle DB] Transaction committed successfully.\n");
+    // printf("[Oracle DB] Transaction committed successfully.\n");
 
     if (stmthp != NULL) {
         OCIHandleFree(stmthp, OCI_HTYPE_STMT);
@@ -178,7 +178,7 @@ int OracleDB_execute_bind(OracleDB *db, const char *sql_query, const char **bind
         return 1;
     }
 
-    printf("[Oracle DB] Bind SQL statement executed successfully.\n");
+    // printf("[Oracle DB] Bind SQL statement executed successfully.\n");
 
     // Commit the transaction
     db->status = OCITransCommit(db->svchp, db->errhp, OCI_DEFAULT);
@@ -188,7 +188,7 @@ int OracleDB_execute_bind(OracleDB *db, const char *sql_query, const char **bind
         return 1;
     }
 
-    printf("[Oracle DB] Transaction committed successfully.\n");
+    // printf("[Oracle DB] Transaction committed successfully.\n");
 
     // Free the statement handle
     if (stmthp != NULL) {
@@ -232,7 +232,7 @@ int OracleDB_disconnect(OracleDB *db) {
     if (db->usrhp && db->svchp && db->errhp) OCISessionEnd(db->svchp, db->errhp, db->usrhp, OCI_DEFAULT);
     if (db->srvhp && db->errhp) OCIServerDetach(db->srvhp, db->errhp, OCI_DEFAULT);
     OracleDB_clean_up(db);
-    printf("[Oracle DB] Disconnected from Oracle Database.\n");
+    // printf("[Oracle DB] Disconnected from Oracle Database.\n");
     return 0;
 }
 
@@ -277,14 +277,14 @@ int read_key_file(char *username, char *password, char *wallet_pw) {
 // @return 0 if success, 1 if error
 int set_environment() {
     // Set TNS_ADMIN environment variable
-    printf("[Oracle DB] Setting TNS_ADMIN environment variable.\n");
+    // printf("[Oracle DB] Setting TNS_ADMIN environment variable.\n");
     if(setenv("TNS_ADMIN", "/opt/tx-processor/build/src/util/oracle/wallet/", 1) != 0) {
         perror("Error setting TNS_ADMIN environment variable");
         return 1;
     }
 
     // Set LD_LIBRARY_PATH environment variable
-    printf("[Oracle DB] Setting LD_LIBRARY_PATH environment variable.\n");
+    // printf("[Oracle DB] Setting LD_LIBRARY_PATH environment variable.\n");
     if(setenv("LD_LIBRARY_PATH", "/opt/tx-processor/build/src/util/oracle/instantclient/", 1) != 0) {
         perror("Error setting LD_LIBRARY_PATH environment variable");
         return 1;

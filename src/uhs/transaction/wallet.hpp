@@ -36,6 +36,11 @@ namespace cbdc::transaction {
         /// Initializes the randomization engine for key shuffling.
         wallet();
 
+        /// \brief Destructor.
+        ///
+        /// Clears the wallet.
+        ~wallet();
+
         /// \brief Mints new spendable outputs.
         ///
         /// Generates the specified number spendable outputs, each with the
