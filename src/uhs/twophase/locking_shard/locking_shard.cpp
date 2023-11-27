@@ -207,7 +207,7 @@ namespace cbdc::locking_shard {
 
 
 
-        std::string dtx_inputs_insert = "INSERT INTO admin.input (transhash, inputhash) VALUES ('" + dtx_hex + "')";
+       // std::string dtx_inputs_insert = "INSERT INTO admin.input (transhash, inputhash) VALUES ('" + dtx_hex + "')";
 
 
         std::string dtx_hex_insert = "UPDATE admin.transaction SET confirmed = 1 WHERE hash = '" + dtx_hex + "'"; 
