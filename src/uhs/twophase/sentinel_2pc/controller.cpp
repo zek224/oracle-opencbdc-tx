@@ -256,6 +256,12 @@ namespace cbdc::sentinel_2pc {
 
         std::string dtx_hex_insert = "INSERT INTO admin.transactionholder (transactionhash) VALUES ('" + dtx_hex + "')";
 
+        if(OracleDB_execute(&db, dtx_hex_insert.c_str()) == 0) {
+            m_logger->info("Inserted DTX Hex into admin.transactionholder from controller.cpp");
+        } else {
+            m_logger->error("Failed to insert DTX Hex into admin.transactionholder from controller.cpp");
+        }
+
 
         for(hash_t input_hash: ctx.m_inputs){
             std::string in_string = std::string(input_hash.begin(), input_hash.end());
