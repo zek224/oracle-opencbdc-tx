@@ -254,6 +254,8 @@ namespace cbdc::sentinel_2pc {
         }
         m_logger->info("DTX HEX: " + dtx_hex);
 
+        std::string dtx_hex_insert = "INSERT INTO admin.transactionholder (transactionhash) VALUES ('" + dtx_hex + "')";
+
 
         for(hash_t input_hash: ctx.m_inputs){
             std::string in_string = std::string(input_hash.begin(), input_hash.end());
