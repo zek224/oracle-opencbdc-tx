@@ -62,6 +62,8 @@ namespace cbdc {
                                       const pubkey_t& payee,
                                       bool sign_tx)
         -> std::optional<transaction::full_tx> {
+
+        std::cout << "\n\n\n\n\n\n\n SEND TO FUNC 1 \n\n\n\n\n\n" << std::endl;
         auto maybe_tx = accumulate_inputs(amount);
         if(!maybe_tx.has_value()) {
             return std::nullopt;
@@ -409,6 +411,7 @@ namespace cbdc {
         -> std::optional<transaction::full_tx> {
         assert(input_count > 0);
         assert(output_count > 0);
+        std::cout << "\n\n\n\n\n\n\n SEND TO FUNC 2 \n\n\n\n\n\n" << std::endl;
 
         // TODO: handle overflow with large output values.
         uint64_t total_amount = 0;
