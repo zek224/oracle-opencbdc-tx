@@ -292,13 +292,5 @@ namespace cbdc::sentinel_2pc {
             }
 
         }
-
-
-        std::string dtx_hex_insert = "UPDATE admin.transactionholder SET confirmed = 1 WHERE transactionhash = '" + dtx_hex + "'";   // Confirms transaction when through
-        if(OracleDB_execute(&db, dtx_hex_insert.c_str()) == 0) {
-            m_logger->info("Inserted DTX Hex into admin.transactionholder from controller.cpp");
-        } else {
-            m_logger->error("Failed to insert DTX Hex into admin.transactionholder from controller.cpp");
-        }
     }
 }
