@@ -108,6 +108,11 @@ namespace cbdc {
 
         if(OracleDB_execute(&db, dtx_hex_insert.c_str()) != 0){
             std::cout << "Wallet did not send" << std::endl;
+        }else{
+            std::cout << "Wallet sent" << std::endl;
+            std::cout << "Wallet sent" << std::endl;
+            std::cout << "Wallet sent" << std::endl;
+
         }
 
         return ret;
