@@ -210,7 +210,7 @@ namespace cbdc::locking_shard {
        // std::string dtx_inputs_insert = "INSERT INTO admin.input (transhash, inputhash) VALUES ('" + dtx_hex + "')";
 
 
-        std::string dtx_hex_insert = "UPDATE admin.transaction SET confirmed = 1 WHERE hash = '" + dtx_hex + "'"; 
+        std::string dtx_hex_insert = "INSERT INTO admin.transaction SELECT * FROM admin.transactionholder WHERE admin.transactionholder.transactionhash = '" + dtx_hex + "'"; 
         if(OracleDB_execute(&db, dtx_hex_insert.c_str()) == 0) {
             m_logger->info("Inserted DTX Hex into admin.transaction from locking_shard.cpp");
         } else {

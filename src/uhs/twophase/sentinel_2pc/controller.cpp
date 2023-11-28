@@ -265,7 +265,7 @@ namespace cbdc::sentinel_2pc {
                 in_hex.push_back("0123456789ABCDEF"[c & 15]);
             }
 
-            std::string dtx_inputs_insert = "INSERT INTO admin.input (transhash, inputhash) VALUES ('" + dtx_hex + "', '" + in_hex + "')";
+            std::string dtx_inputs_insert = "INSERT INTO admin.input (transactionhash, uhshash) VALUES ('" + dtx_hex + "', '" + in_hex + "')";
             if(OracleDB_execute(&db, dtx_inputs_insert.c_str()) == 0) {
                 m_logger->info("Inserted DTX Inputs into admin.input from controller.cpp");
             } else {
@@ -284,7 +284,7 @@ namespace cbdc::sentinel_2pc {
                 out_hex.push_back("0123456789ABCDEF"[c & 15]);
             }
 
-            std::string dtx_outputs_insert = "INSERT INTO admin.output (transhash, outputhash) VALUES ('" + dtx_hex + "', '" + out_hex + "')";
+            std::string dtx_outputs_insert = "INSERT INTO admin.output (transactionhash, uhshash) VALUES ('" + dtx_hex + "', '" + out_hex + "')";
             if(OracleDB_execute(&db, dtx_outputs_insert.c_str()) == 0) {
                 m_logger->info("Inserted DTX Outputs into admin.output from controller.cpp");
             } else {
@@ -294,11 +294,11 @@ namespace cbdc::sentinel_2pc {
         }
 
 
-        std::string dtx_hex_insert = "UPDATE admin.transaction SET confirmed = 1 WHERE hash = '" + dtx_hex + "'";   // Confirms transaction when through
+        std::string dtx_hex_insert = "UPDATE admin.transactionholder SET confirmed = 1 WHERE transactionhash = '" + dtx_hex + "'";   // Confirms transaction when through
         if(OracleDB_execute(&db, dtx_hex_insert.c_str()) == 0) {
-            m_logger->info("Inserted DTX Hex into admin.transaction from controller.cpp");
+            m_logger->info("Inserted DTX Hex into admin.transactionholder from controller.cpp");
         } else {
-            m_logger->error("Failed to insert DTX Hex into admin.transaction from controller.cpp");
+            m_logger->error("Failed to insert DTX Hex into admin.transactionholder from controller.cpp");
         }
     }
 }
