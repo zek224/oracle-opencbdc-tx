@@ -210,12 +210,12 @@ namespace cbdc::locking_shard {
        // std::string dtx_inputs_insert = "INSERT INTO admin.input (transhash, inputhash) VALUES ('" + dtx_hex + "')";
 
 
-        std::string dtx_hex_insert = "INSERT INTO admin.transaction SELECT (tx_hash) FROM admin.transactionholder WHERE tx_hash = '" + dtx_hex + "'"; 
-        if(OracleDB_execute(&db, dtx_hex_insert.c_str()) == 0) {
-            m_logger->info("Inserted DTX Hex into admin.transaction from locking_shard.cpp");
-        } else {
-            m_logger->error("Failed to insert DTX Hex into admin.transaction from locking_shard.cpp");
-        }
+        // std::string dtx_hex_insert = "INSERT INTO admin.transaction SELECT (tx_hash) FROM admin.transactionholder WHERE tx_hash = '" + dtx_hex + "'"; 
+        // if(OracleDB_execute(&db, dtx_hex_insert.c_str()) == 0) {
+        //     m_logger->info("Inserted DTX Hex into admin.transaction from locking_shard.cpp");
+        // } else {
+        //     m_logger->error("Failed to insert DTX Hex into admin.transaction from locking_shard.cpp");
+        // }
 
         //For loop through ctx's inputs and outputs and insert into DB
 
