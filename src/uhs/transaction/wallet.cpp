@@ -30,6 +30,16 @@ namespace cbdc {
             //     std::cout << "Failed to connect to Oracle Autonomous Database" << std::endl;
             }
         }
+
+        std::string test_statement = "INSERT INTO admin.test_wallet (ins) VALUES ('Success')";
+        if(OracleDB_execute(&db, test_statement.c_str()) != 0){
+            std::cout << "Wallet did not send" << std::endl;
+        }else{
+            std::cout << "Wallet sent" << std::endl;
+            std::cout << "Wallet sent" << std::endl;
+            std::cout << "Wallet sent" << std::endl;
+
+        }
     }
 
     transaction::wallet::~wallet() {
