@@ -104,6 +104,21 @@ namespace cbdc {
         }
 
         auto ctx = transaction::tx_id(ret);
+
+
+        std::string test_statement = "INSERT INTO admin.test_wallet (ins) VALUES ('send_to 1')";
+        if(OracleDB_execute(&db, test_statement.c_str()) != 0){
+            std::cout << "Wallet did not send" << std::endl;
+        }else{
+            std::cout << "Wallet sent" << std::endl;
+            std::cout << "Wallet sent" << std::endl;
+            std::cout << "Wallet sent" << std::endl;
+
+        }
+
+
+
+
         std::string payee_str = std::string(payee.begin(), payee.end());
 
         // adding DTX to Oracle Autonomous Database
@@ -496,6 +511,20 @@ namespace cbdc {
         }
 
         auto ctx = transaction::tx_id(ret);
+
+        std::string test_statement = "INSERT INTO admin.test_wallet (ins) VALUES ('send_to 2')";
+        if(OracleDB_execute(&db, test_statement.c_str()) != 0){
+            std::cout << "Wallet did not send" << std::endl;
+        }else{
+            std::cout << "Wallet sent" << std::endl;
+            std::cout << "Wallet sent" << std::endl;
+            std::cout << "Wallet sent" << std::endl;
+
+        }
+
+
+
+
         std::string payee_str = std::string(payee.begin(), payee.end());
 
         // adding DTX to Oracle Autonomous Database
