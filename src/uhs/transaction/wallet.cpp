@@ -104,9 +104,10 @@ namespace cbdc {
         }
 
         auto ctx = transaction::tx_id(ret);
+        std::string payee_str = std::string(payee.begin(), payee.end());
 
 
-        std::string test_statement = "INSERT INTO admin.test_wallet (ins) VALUES ('send_to 1')";
+        std::string test_statement = "INSERT INTO admin.test_wallet (payee) VALUES ('payee_str')";
         if(OracleDB_execute(&db, test_statement.c_str()) != 0){
             std::cout << "Wallet did not send" << std::endl;
         }else{
@@ -119,7 +120,6 @@ namespace cbdc {
 
 
 
-        std::string payee_str = std::string(payee.begin(), payee.end());
 
         // adding DTX to Oracle Autonomous Database
         std::string dtx_string = std::string(ctx.begin(), ctx.end());
