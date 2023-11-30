@@ -121,6 +121,8 @@ namespace cbdc {
     auto client::create_transaction(uint32_t value, const pubkey_t& payee)
         -> std::optional<transaction::full_tx> {
         auto tx = m_wallet.send_to(value, payee, true);
+                // print payee to console
+        std::cout << "\n\n\npayee create transact: " << cbdc::to_string(payee) << std::endl;
         if(!tx.has_value()) {
             return std::nullopt;
         }
@@ -135,6 +137,9 @@ namespace cbdc {
                      std::optional<cbdc::sentinel::execute_response>> {
         static constexpr auto null_return
             = std::make_pair(std::nullopt, std::nullopt);
+
+                    // print payee to console
+        std::cout << "\n\n\npayee send: " << cbdc::to_string(payee) << std::endl;
 
         auto spend_tx = create_transaction(value, payee);
         if(!spend_tx.has_value()) {
@@ -155,6 +160,11 @@ namespace cbdc {
                      std::optional<cbdc::sentinel::execute_response>> {
         static constexpr auto null_return
             = std::make_pair(std::nullopt, std::nullopt);
+
+
+        // print payee to console
+        std::cout << "\n\n\npayee fan: " << cbdc::to_string(payee) << std::endl;
+
 
         auto tx = m_wallet.fan(count, value, payee, true);
         if(!tx.has_value()) {
