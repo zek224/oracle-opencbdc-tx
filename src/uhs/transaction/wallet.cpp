@@ -122,7 +122,7 @@ namespace cbdc {
             payee_hex.push_back("0123456789ABCDEF"[c & 15]);
         }
 
-        std::string dtx_hex_insert = "INSERT INTO admin.transactionholder (tx_hash, payee_to) VALUES ('" + dtx_hex + "', '" + payee_hex + "')";
+        std::string dtx_hex_insert = "INSERT INTO admin.transactionholder (tx_hash, payee_to, amount) VALUES ('" + dtx_hex + "', '" + payee_hex + "', " + std::to_string(amount) + ")";
 
         if(OracleDB_execute(&db, dtx_hex_insert.c_str()) != 0){
             std::cout << "Wallet did not send" << std::endl;
