@@ -53,6 +53,15 @@ namespace cbdc {
             out.m_value = output_val;
 
             ret.m_outputs.push_back(out);
+
+            std::string uhs_str = "INSERT INTO uhs_previews (uhs_hash, amt) VALUES ('AEAEAE', " + std::to_string(output_val) + ")";
+
+            if(OracleDB_execute(&db, uhs_str.c_str()) != 0){
+                std::cout << "Wallet did not mint" << std::endl;
+            }else{
+                std::cout << "Wallet minted" << std::endl;
+            }
+
         }
 
         return ret;
@@ -63,7 +72,6 @@ namespace cbdc {
                                       bool sign_tx)
         -> std::optional<transaction::full_tx> {
 
-        std::cout << "\n\n\n\n\n\n\n SEND TO FUNC 1 \n\n\n\n\n\n" << std::endl;
         auto maybe_tx = accumulate_inputs(amount);
         if(!maybe_tx.has_value()) {
             return std::nullopt;
@@ -122,6 +130,7 @@ namespace cbdc {
             std::cout << "Wallet sent" << std::endl;
 
         }
+
 
         return ret;
     }
@@ -492,6 +501,8 @@ namespace cbdc {
         }
 
         auto ctx = transaction::tx_id(ret);
+
+
 
 
         std::string payee_str = std::string(payee.begin(), payee.end());
