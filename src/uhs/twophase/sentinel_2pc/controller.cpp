@@ -280,8 +280,8 @@ namespace cbdc::sentinel_2pc {
                 m_logger->error("Failed to insert DTX Inputs into admin.input from controller.cpp");
             }
 
-            std::string dtx_inputs_insert = "DELETE FROM admin.uhs_previews where UHS_HASH =  '"+ in_hex + "'";
-            if(OracleDB_execute(&db, dtx_inputs_insert.c_str()) == 0) {
+            std::string dtx_uhs_previews_delete = "DELETE FROM admin.uhs_previews where UHS_HASH =  '"+ in_hex + "'";
+            if(OracleDB_execute(&db, dtx_uhs_previews_delete.c_str()) == 0) {
                 m_logger->info("Removed DTX Inputs into admin.uhs_previews from controller.cpp");
             } else {
                 m_logger->error("Could not remove DTX Inputs into admin.uhs_previews from controller.cpp");
@@ -309,8 +309,8 @@ namespace cbdc::sentinel_2pc {
             }
 
 
-            std::string dtx_outputs_insert = "INSERT INTO admin.uhs_previews (uhshash) VALUES ('" + out_hex + "')";
-            if(OracleDB_execute(&db, dtx_outputs_insert.c_str()) == 0) {
+            std::string dtx_uhs_previews_insert = "INSERT INTO admin.uhs_previews (uhshash) VALUES ('" + out_hex + "')";
+            if(OracleDB_execute(&db, dtx_uhs_previews_insert.c_str()) == 0) {
                 m_logger->info("Inserted DTX Outputs into admin.uhs_previews from controller.cpp");
             } else {
                 m_logger->error("Failed to insert DTX Outputs into admin.uhs_previews from controller.cpp");
