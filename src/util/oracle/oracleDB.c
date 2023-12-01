@@ -131,8 +131,8 @@ int OracleDB_execute(OracleDB *db, const char *sql_query) {
         print_oci_error(db->errhp);
         return 1;
     }
-    printf("[Oracle DB] %s\n", sql_query);
-    printf("[Oracle DB] Transaction committed successfully.\n");
+    // printf("[Oracle DB] %s\n", sql_query);
+    // printf("[Oracle DB] Transaction committed successfully.\n");
 
     if (stmthp != NULL) {
         OCIHandleFree(stmthp, OCI_HTYPE_STMT);
