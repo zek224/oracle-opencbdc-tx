@@ -191,35 +191,7 @@ namespace cbdc::locking_shard {
 
         m_prepared_dtxs.erase(dtx_id);
         m_applied_dtxs.insert(dtx_id);
-
-        // adding DTX to Oracle Autonomous Database
-        std::string dtx_string = std::string(dtx_id.begin(), dtx_id.end());
-        m_logger->info("DTX: " + std::string(dtx_id.begin(), dtx_id.end()));
-        std::string dtx_hex;
-        dtx_hex.reserve(2*dtx_string.size());
-
-        // convert dtx_string into a hex string
-        for (unsigned char c : dtx_string) {
-            dtx_hex.push_back("0123456789ABCDEF"[c >> 4]);
-            dtx_hex.push_back("0123456789ABCDEF"[c & 15]);
-        }
-        m_logger->info("DTX HEX: " + dtx_hex);
-
-
-
-       // std::string dtx_inputs_insert = "INSERT INTO admin.input (transhash, inputhash) VALUES ('" + dtx_hex + "')";
-
-
-        // std::string dtx_hex_insert = "INSERT INTO admin.transaction SELECT (tx_hash) FROM admin.transactionholder WHERE tx_hash = '" + dtx_hex + "'"; 
-        // if(OracleDB_execute(&db, dtx_hex_insert.c_str()) == 0) {
-        //     m_logger->info("Inserted DTX Hex into admin.transaction from locking_shard.cpp");
-        // } else {
-        //     m_logger->error("Failed to insert DTX Hex into admin.transaction from locking_shard.cpp");
-        // }
-
-        //For loop through ctx's inputs and outputs and insert into DB
-
-
+        
         return true;
     }
 

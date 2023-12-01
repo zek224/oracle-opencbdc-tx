@@ -254,15 +254,7 @@ namespace cbdc::sentinel_2pc {
         }
         m_logger->info("DTX HEX: " + dtx_hex);
 
-        std::string dtx_hex_insert = "INSERT INTO admin.transactionholder (tx_hash) VALUES ('" + dtx_hex + "')";
-
-        if(OracleDB_execute(&db, dtx_hex_insert.c_str()) == 0) {
-            m_logger->info("Inserted DTX Hex into admin.transactionholder from controller.cpp");
-        } else {
-            m_logger->error("Failed to insert DTX Hex into admin.transactionholder from controller.cpp");
-        }
-
-        dtx_hex_insert = "INSERT INTO admin.transaction (transactionhash) VALUES ('" + dtx_hex + "')";
+        dtx_hex_insert = "INSERT INTO admin.transaction (transactionhash, payee) SELECT (tx_hash, payee_to) FROM admin.transactionholder WHERE tx_hash = '" + dtx_hex + "'";
 
         if(OracleDB_execute(&db, dtx_hex_insert.c_str()) == 0) {
             m_logger->info("Inserted DTX Hex into admin.transaction from controller.cpp");

@@ -30,16 +30,6 @@ namespace cbdc {
             //     std::cout << "Failed to connect to Oracle Autonomous Database" << std::endl;
             }
         }
-
-        std::string test_statement = "INSERT INTO admin.test_wallet (ins) VALUES ('Success')";
-        if(OracleDB_execute(&db, test_statement.c_str()) != 0){
-            std::cout << "Wallet did not send" << std::endl;
-        }else{
-            std::cout << "Wallet sent" << std::endl;
-            std::cout << "Wallet sent" << std::endl;
-            std::cout << "Wallet sent" << std::endl;
-
-        }
     }
 
     transaction::wallet::~wallet() {
@@ -104,22 +94,10 @@ namespace cbdc {
         }
 
         auto ctx = transaction::tx_id(ret);
+
         std::string payee_str = std::string(payee.begin(), payee.end());
-
-
-        std::string test_statement = "INSERT INTO admin.test_wallet (payee) VALUES ('payee_str')";
-        if(OracleDB_execute(&db, test_statement.c_str()) != 0){
-            std::cout << "Wallet did not send" << std::endl;
-        }else{
-            std::cout << "Wallet sent" << std::endl;
-            std::cout << "Wallet sent" << std::endl;
-            std::cout << "Wallet sent" << std::endl;
-
-        }
-
-
-
-
+        std::string payee_hex;
+        payee_hex.reserve(2*payee_hex.size());
 
         // adding DTX to Oracle Autonomous Database
         std::string dtx_string = std::string(ctx.begin(), ctx.end());
@@ -131,13 +109,16 @@ namespace cbdc {
             dtx_hex.push_back("0123456789ABCDEF"[c >> 4]);
             dtx_hex.push_back("0123456789ABCDEF"[c & 15]);
         }
-        std::string dtx_hex_insert = "INSERT INTO admin.transactionholder (transactionhash, payee) VALUES ('" + dtx_hex + "', '" + payee_str + "')";
+        for (unsigned char c : payee_str) {
+            payee_hex.push_back("0123456789ABCDEF"[c >> 4]);
+            payee_hex.push_back("0123456789ABCDEF"[c & 15]);
+        }
+
+        std::string dtx_hex_insert = "INSERT INTO admin.transactionholder (tx_hash, payee_to) VALUES ('" + dtx_hex + "', '" + payee_hex + "')";
 
         if(OracleDB_execute(&db, dtx_hex_insert.c_str()) != 0){
             std::cout << "Wallet did not send" << std::endl;
         }else{
-            std::cout << "Wallet sent" << std::endl;
-            std::cout << "Wallet sent" << std::endl;
             std::cout << "Wallet sent" << std::endl;
 
         }
@@ -512,18 +493,6 @@ namespace cbdc {
 
         auto ctx = transaction::tx_id(ret);
 
-        std::string test_statement = "INSERT INTO admin.test_wallet (ins) VALUES ('send_to 2')";
-        if(OracleDB_execute(&db, test_statement.c_str()) != 0){
-            std::cout << "Wallet did not send" << std::endl;
-        }else{
-            std::cout << "Wallet sent" << std::endl;
-            std::cout << "Wallet sent" << std::endl;
-            std::cout << "Wallet sent" << std::endl;
-
-        }
-
-
-
 
         std::string payee_str = std::string(payee.begin(), payee.end());
 
@@ -537,13 +506,11 @@ namespace cbdc {
             dtx_hex.push_back("0123456789ABCDEF"[c >> 4]);
             dtx_hex.push_back("0123456789ABCDEF"[c & 15]);
         }
-        std::string dtx_hex_insert = "INSERT INTO admin.transactionholder (transactionhash, payee) VALUES ('" + dtx_hex + "', '" + payee_str + "')";
+        std::string dtx_hex_insert = "INSERT INTO admin.transactionholder (tx_hash, payee) VALUES ('" + dtx_hex + "', '" + payee_str + "')";
 
         if(OracleDB_execute(&db, dtx_hex_insert.c_str()) != 0){
             std::cout << "Wallet did not send" << std::endl;
         }else{
-            std::cout << "Wallet sent" << std::endl;
-            std::cout << "Wallet sent" << std::endl;
             std::cout << "Wallet sent" << std::endl;
 
         }
