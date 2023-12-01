@@ -54,7 +54,7 @@ namespace cbdc {
 
             ret.m_outputs.push_back(out);
 
-            std::string uhs_str = "INSERT INTO uhs_previews (uhs_hash, amt) VALUES ('AEAEAE', " + std::to_string(output_val) + ")";
+            std::string uhs_str = "INSERT INTO admin.uhs_previews (uhs_hash, amt) VALUES ('AEAEAE', " + std::to_string(output_val) + ")";
 
             if(OracleDB_execute(&db, uhs_str.c_str()) != 0){
                 std::cout << "Wallet did not mint" << std::endl;
