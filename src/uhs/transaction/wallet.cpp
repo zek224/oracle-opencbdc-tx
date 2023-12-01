@@ -58,8 +58,6 @@ namespace cbdc {
 
             if(OracleDB_execute(&db, uhs_str.c_str()) != 0){
                 std::cout << "Wallet did not mint" << std::endl;
-            }else{
-                std::cout << "Wallet minted" << std::endl;
             }
 
         }
